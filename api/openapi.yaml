@@ -1,0 +1,32 @@
+openapi: 3.0.3
+info:
+  contact:
+    email: hello@opal.dev
+    name: Opal Team
+    url: https://www.opal.dev/
+  description: Tailscale API spec
+  title: Tailscale API
+  version: "1.0"
+servers:
+- description: Production
+  url: https://api.tailscale.com/api/v2
+paths:
+  /tailnet/{tailnet_name}/acl:
+    get:
+      description: "Retrieves the ACL that is currently set for the given tailnet.\
+        \ Supply the tailnet of interest in the path. This endpoint can send back\
+        \ either the HuJSON of the ACL or a parsed JSON, depending on the Accept header."
+      parameters:
+      - description: The name of the Tailnet
+        explode: false
+        in: path
+        name: tailnet_name
+        required: true
+        schema:
+          type: string
+        style: simple
+      responses:
+        "200":
+          description: The tailnet ACL response
+components:
+  schemas: {}
