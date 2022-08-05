@@ -115,3 +115,95 @@ func (a *DefaultApiService) TailnetTailnetNameAclGetExecute(r ApiTailnetTailnetN
 
 	return localVarHTTPResponse, nil
 }
+
+type ApiTailnetTailnetNameAclPostRequest struct {
+	ctx context.Context
+	ApiService *DefaultApiService
+	tailnetName string
+}
+
+func (r ApiTailnetTailnetNameAclPostRequest) Execute() (*http.Response, error) {
+	return r.ApiService.TailnetTailnetNameAclPostExecute(r)
+}
+
+/*
+TailnetTailnetNameAclPost Method for TailnetTailnetNameAclPost
+
+Sets the ACL for the given domain. HuJSON and JSON are both accepted inputs. An If-Match header can be set to avoid missed updates.
+
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param tailnetName The name of the Tailnet
+ @return ApiTailnetTailnetNameAclPostRequest
+*/
+func (a *DefaultApiService) TailnetTailnetNameAclPost(ctx context.Context, tailnetName string) ApiTailnetTailnetNameAclPostRequest {
+	return ApiTailnetTailnetNameAclPostRequest{
+		ApiService: a,
+		ctx: ctx,
+		tailnetName: tailnetName,
+	}
+}
+
+// Execute executes the request
+func (a *DefaultApiService) TailnetTailnetNameAclPostExecute(r ApiTailnetTailnetNameAclPostRequest) (*http.Response, error) {
+	var (
+		localVarHTTPMethod   = http.MethodPost
+		localVarPostBody     interface{}
+		formFiles            []formFile
+	)
+
+	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "DefaultApiService.TailnetTailnetNameAclPost")
+	if err != nil {
+		return nil, &GenericOpenAPIError{error: err.Error()}
+	}
+
+	localVarPath := localBasePath + "/tailnet/{tailnet_name}/acl"
+	localVarPath = strings.Replace(localVarPath, "{"+"tailnet_name"+"}", url.PathEscape(parameterToString(r.tailnetName, "")), -1)
+
+	localVarHeaderParams := make(map[string]string)
+	localVarQueryParams := url.Values{}
+	localVarFormParams := url.Values{}
+
+	// to determine the Content-Type header
+	localVarHTTPContentTypes := []string{}
+
+	// set Content-Type header
+	localVarHTTPContentType := selectHeaderContentType(localVarHTTPContentTypes)
+	if localVarHTTPContentType != "" {
+		localVarHeaderParams["Content-Type"] = localVarHTTPContentType
+	}
+
+	// to determine the Accept header
+	localVarHTTPHeaderAccepts := []string{}
+
+	// set Accept header
+	localVarHTTPHeaderAccept := selectHeaderAccept(localVarHTTPHeaderAccepts)
+	if localVarHTTPHeaderAccept != "" {
+		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
+	}
+	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
+	if err != nil {
+		return nil, err
+	}
+
+	localVarHTTPResponse, err := a.client.callAPI(req)
+	if err != nil || localVarHTTPResponse == nil {
+		return localVarHTTPResponse, err
+	}
+
+	localVarBody, err := ioutil.ReadAll(localVarHTTPResponse.Body)
+	localVarHTTPResponse.Body.Close()
+	localVarHTTPResponse.Body = ioutil.NopCloser(bytes.NewBuffer(localVarBody))
+	if err != nil {
+		return localVarHTTPResponse, err
+	}
+
+	if localVarHTTPResponse.StatusCode >= 300 {
+		newErr := &GenericOpenAPIError{
+			body:  localVarBody,
+			error: localVarHTTPResponse.Status,
+		}
+		return localVarHTTPResponse, newErr
+	}
+
+	return localVarHTTPResponse, nil
+}

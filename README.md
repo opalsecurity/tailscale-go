@@ -80,6 +80,7 @@ All URIs are relative to *https://api.tailscale.com/api/v2*
 Class | Method | HTTP request | Description
 ------------ | ------------- | ------------- | -------------
 *DefaultApi* | [**TailnetTailnetNameAclGet**](docs/DefaultApi.md#tailnettailnetnameaclget) | **Get** /tailnet/{tailnet_name}/acl | 
+*DefaultApi* | [**TailnetTailnetNameAclPost**](docs/DefaultApi.md#tailnettailnetnameaclpost) | **Post** /tailnet/{tailnet_name}/acl | 
 
 
 ## Documentation For Models

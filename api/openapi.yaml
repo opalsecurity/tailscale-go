@@ -28,5 +28,20 @@ paths:
       responses:
         "200":
           description: The tailnet ACL response
+    post:
+      description: Sets the ACL for the given domain. HuJSON and JSON are both accepted
+        inputs. An If-Match header can be set to avoid missed updates.
+      parameters:
+      - description: The name of the Tailnet
+        explode: false
+        in: path
+        name: tailnet_name
+        required: true
+        schema:
+          type: string
+        style: simple
+      responses:
+        "200":
+          description: the updated tailnet ACL response
 components:
   schemas: {}
