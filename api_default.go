@@ -30,7 +30,7 @@ type ApiTailnetTailnetNameAclGetRequest struct {
 	tailnetName string
 }
 
-func (r ApiTailnetTailnetNameAclGetRequest) Execute() (*http.Response, error) {
+func (r ApiTailnetTailnetNameAclGetRequest) Execute() (*TailnetACL, *http.Response, error) {
 	return r.ApiService.TailnetTailnetNameAclGetExecute(r)
 }
 
@@ -52,16 +52,18 @@ func (a *DefaultApiService) TailnetTailnetNameAclGet(ctx context.Context, tailne
 }
 
 // Execute executes the request
-func (a *DefaultApiService) TailnetTailnetNameAclGetExecute(r ApiTailnetTailnetNameAclGetRequest) (*http.Response, error) {
+//  @return TailnetACL
+func (a *DefaultApiService) TailnetTailnetNameAclGetExecute(r ApiTailnetTailnetNameAclGetRequest) (*TailnetACL, *http.Response, error) {
 	var (
 		localVarHTTPMethod   = http.MethodGet
 		localVarPostBody     interface{}
 		formFiles            []formFile
+		localVarReturnValue  *TailnetACL
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "DefaultApiService.TailnetTailnetNameAclGet")
 	if err != nil {
-		return nil, &GenericOpenAPIError{error: err.Error()}
+		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/tailnet/{tailnet_name}/acl"
@@ -81,7 +83,7 @@ func (a *DefaultApiService) TailnetTailnetNameAclGetExecute(r ApiTailnetTailnetN
 	}
 
 	// to determine the Accept header
-	localVarHTTPHeaderAccepts := []string{}
+	localVarHTTPHeaderAccepts := []string{"application/json"}
 
 	// set Accept header
 	localVarHTTPHeaderAccept := selectHeaderAccept(localVarHTTPHeaderAccepts)
@@ -90,19 +92,19 @@ func (a *DefaultApiService) TailnetTailnetNameAclGetExecute(r ApiTailnetTailnetN
 	}
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
-		return nil, err
+		return localVarReturnValue, nil, err
 	}
 
 	localVarHTTPResponse, err := a.client.callAPI(req)
 	if err != nil || localVarHTTPResponse == nil {
-		return localVarHTTPResponse, err
+		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	localVarBody, err := ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
 	localVarHTTPResponse.Body = ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
-		return localVarHTTPResponse, err
+		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
@@ -110,19 +112,34 @@ func (a *DefaultApiService) TailnetTailnetNameAclGetExecute(r ApiTailnetTailnetN
 			body:  localVarBody,
 			error: localVarHTTPResponse.Status,
 		}
-		return localVarHTTPResponse, newErr
+		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
 
-	return localVarHTTPResponse, nil
+	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+	if err != nil {
+		newErr := &GenericOpenAPIError{
+			body:  localVarBody,
+			error: err.Error(),
+		}
+		return localVarReturnValue, localVarHTTPResponse, newErr
+	}
+
+	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
 type ApiTailnetTailnetNameAclPostRequest struct {
 	ctx context.Context
 	ApiService *DefaultApiService
 	tailnetName string
+	tailnetACL *TailnetACL
 }
 
-func (r ApiTailnetTailnetNameAclPostRequest) Execute() (*http.Response, error) {
+func (r ApiTailnetTailnetNameAclPostRequest) TailnetACL(tailnetACL TailnetACL) ApiTailnetTailnetNameAclPostRequest {
+	r.tailnetACL = &tailnetACL
+	return r
+}
+
+func (r ApiTailnetTailnetNameAclPostRequest) Execute() (*TailnetACL, *http.Response, error) {
 	return r.ApiService.TailnetTailnetNameAclPostExecute(r)
 }
 
@@ -144,16 +161,18 @@ func (a *DefaultApiService) TailnetTailnetNameAclPost(ctx context.Context, tailn
 }
 
 // Execute executes the request
-func (a *DefaultApiService) TailnetTailnetNameAclPostExecute(r ApiTailnetTailnetNameAclPostRequest) (*http.Response, error) {
+//  @return TailnetACL
+func (a *DefaultApiService) TailnetTailnetNameAclPostExecute(r ApiTailnetTailnetNameAclPostRequest) (*TailnetACL, *http.Response, error) {
 	var (
 		localVarHTTPMethod   = http.MethodPost
 		localVarPostBody     interface{}
 		formFiles            []formFile
+		localVarReturnValue  *TailnetACL
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "DefaultApiService.TailnetTailnetNameAclPost")
 	if err != nil {
-		return nil, &GenericOpenAPIError{error: err.Error()}
+		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/tailnet/{tailnet_name}/acl"
@@ -164,7 +183,7 @@ func (a *DefaultApiService) TailnetTailnetNameAclPostExecute(r ApiTailnetTailnet
 	localVarFormParams := url.Values{}
 
 	// to determine the Content-Type header
-	localVarHTTPContentTypes := []string{}
+	localVarHTTPContentTypes := []string{"application/json"}
 
 	// set Content-Type header
 	localVarHTTPContentType := selectHeaderContentType(localVarHTTPContentTypes)
@@ -173,28 +192,30 @@ func (a *DefaultApiService) TailnetTailnetNameAclPostExecute(r ApiTailnetTailnet
 	}
 
 	// to determine the Accept header
-	localVarHTTPHeaderAccepts := []string{}
+	localVarHTTPHeaderAccepts := []string{"application/json"}
 
 	// set Accept header
 	localVarHTTPHeaderAccept := selectHeaderAccept(localVarHTTPHeaderAccepts)
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
+	// body params
+	localVarPostBody = r.tailnetACL
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
-		return nil, err
+		return localVarReturnValue, nil, err
 	}
 
 	localVarHTTPResponse, err := a.client.callAPI(req)
 	if err != nil || localVarHTTPResponse == nil {
-		return localVarHTTPResponse, err
+		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	localVarBody, err := ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
 	localVarHTTPResponse.Body = ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
-		return localVarHTTPResponse, err
+		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
@@ -202,8 +223,17 @@ func (a *DefaultApiService) TailnetTailnetNameAclPostExecute(r ApiTailnetTailnet
 			body:  localVarBody,
 			error: localVarHTTPResponse.Status,
 		}
-		return localVarHTTPResponse, newErr
+		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
 
-	return localVarHTTPResponse, nil
+	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+	if err != nil {
+		newErr := &GenericOpenAPIError{
+			body:  localVarBody,
+			error: err.Error(),
+		}
+		return localVarReturnValue, localVarHTTPResponse, newErr
+	}
+
+	return localVarReturnValue, localVarHTTPResponse, nil
 }

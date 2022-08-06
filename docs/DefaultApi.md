@@ -11,7 +11,7 @@ Method | HTTP request | Description
 
 ## TailnetTailnetNameAclGet
 
-> TailnetTailnetNameAclGet(ctx, tailnetName).Execute()
+> TailnetACL TailnetTailnetNameAclGet(ctx, tailnetName).Execute()
 
 
 
@@ -39,6 +39,8 @@ func main() {
         fmt.Fprintf(os.Stderr, "Error when calling `DefaultApi.TailnetTailnetNameAclGet``: %v\n", err)
         fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
     }
+    // response from `TailnetTailnetNameAclGet`: TailnetACL
+    fmt.Fprintf(os.Stdout, "Response from `DefaultApi.TailnetTailnetNameAclGet`: %v\n", resp)
 }
 ```
 
@@ -61,7 +63,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
- (empty response body)
+[**TailnetACL**](TailnetACL.md)
 
 ### Authorization
 
@@ -70,7 +72,7 @@ No authorization required
 ### HTTP request headers
 
 - **Content-Type**: Not defined
-- **Accept**: Not defined
+- **Accept**: application/json
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
 [[Back to Model list]](../README.md#documentation-for-models)
@@ -79,7 +81,7 @@ No authorization required
 
 ## TailnetTailnetNameAclPost
 
-> TailnetTailnetNameAclPost(ctx, tailnetName).Execute()
+> TailnetACL TailnetTailnetNameAclPost(ctx, tailnetName).TailnetACL(tailnetACL).Execute()
 
 
 
@@ -99,14 +101,17 @@ import (
 
 func main() {
     tailnetName := "tailnetName_example" // string | The name of the Tailnet
+    tailnetACL := *openapiclient.NewTailnetACL() // TailnetACL |  (optional)
 
     configuration := openapiclient.NewConfiguration()
     apiClient := openapiclient.NewAPIClient(configuration)
-    resp, r, err := apiClient.DefaultApi.TailnetTailnetNameAclPost(context.Background(), tailnetName).Execute()
+    resp, r, err := apiClient.DefaultApi.TailnetTailnetNameAclPost(context.Background(), tailnetName).TailnetACL(tailnetACL).Execute()
     if err != nil {
         fmt.Fprintf(os.Stderr, "Error when calling `DefaultApi.TailnetTailnetNameAclPost``: %v\n", err)
         fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
     }
+    // response from `TailnetTailnetNameAclPost`: TailnetACL
+    fmt.Fprintf(os.Stdout, "Response from `DefaultApi.TailnetTailnetNameAclPost`: %v\n", resp)
 }
 ```
 
@@ -126,10 +131,11 @@ Other parameters are passed through a pointer to a apiTailnetTailnetNameAclPostR
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 
+ **tailnetACL** | [**TailnetACL**](TailnetACL.md) |  | 
 
 ### Return type
 
- (empty response body)
+[**TailnetACL**](TailnetACL.md)
 
 ### Authorization
 
@@ -137,8 +143,8 @@ No authorization required
 
 ### HTTP request headers
 
-- **Content-Type**: Not defined
-- **Accept**: Not defined
+- **Content-Type**: application/json
+- **Accept**: application/json
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
 [[Back to Model list]](../README.md#documentation-for-models)

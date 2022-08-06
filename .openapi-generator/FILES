@@ -5,9 +5,17 @@ api/openapi.yaml
 api_default.go
 client.go
 configuration.go
+docs/ACLRule.md
 docs/DefaultApi.md
+docs/SSHRule.md
+docs/TailnetACL.md
+docs/Test.md
 git_push.sh
 go.mod
 go.sum
+model_acl_rule.go
+model_ssh_rule.go
+model_tailnet_acl.go
+model_test_.go
 response.go
 utils.go

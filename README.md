@@ -85,6 +85,10 @@ Class | Method | HTTP request | Description
 
 ## Documentation For Models
 
+ - [ACLRule](docs/ACLRule.md)
+ - [SSHRule](docs/SSHRule.md)
+ - [TailnetACL](docs/TailnetACL.md)
+ - [Test](docs/Test.md)
 
 
 ## Documentation For Authorization

@@ -27,6 +27,10 @@ paths:
         style: simple
       responses:
         "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TailnetACL'
           description: The tailnet ACL response
     post:
       description: Sets the ACL for the given domain. HuJSON and JSON are both accepted
@@ -40,8 +44,159 @@ paths:
         schema:
           type: string
         style: simple
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/TailnetACL'
       responses:
         "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TailnetACL'
           description: the updated tailnet ACL response
 components:
-  schemas: {}
+  schemas:
+    TailnetACL:
+      example:
+        tests:
+        - deny:
+          - deny
+          - deny
+          src: src
+          accept:
+          - accept
+          - accept
+        - deny:
+          - deny
+          - deny
+          src: src
+          accept:
+          - accept
+          - accept
+        acls:
+        - dst:
+          - dst
+          - dst
+          src:
+          - src
+          - src
+          action: action
+        - dst:
+          - dst
+          - dst
+          src:
+          - src
+          - src
+          action: action
+        hosts: "{}"
+        ssh:
+        - dst:
+          - dst
+          - dst
+          src:
+          - src
+          - src
+          action: action
+          users:
+          - users
+          - users
+        - dst:
+          - dst
+          - dst
+          src:
+          - src
+          - src
+          action: action
+          users:
+          - users
+          - users
+        groups: "{}"
+        tagOwners: "{}"
+      properties:
+        tagOwners:
+          type: object
+        ssh:
+          items:
+            $ref: '#/components/schemas/SSHRule'
+          type: array
+        acls:
+          items:
+            $ref: '#/components/schemas/ACLRule'
+          type: array
+        tests:
+          items:
+            $ref: '#/components/schemas/Test'
+          type: array
+        groups:
+          type: object
+        hosts:
+          type: object
+    Test:
+      example:
+        deny:
+        - deny
+        - deny
+        src: src
+        accept:
+        - accept
+        - accept
+      properties:
+        src:
+          type: string
+        accept:
+          items:
+            type: string
+          type: array
+        deny:
+          items:
+            type: string
+          type: array
+    SSHRule:
+      example:
+        dst:
+        - dst
+        - dst
+        src:
+        - src
+        - src
+        action: action
+        users:
+        - users
+        - users
+      properties:
+        action:
+          type: string
+        src:
+          items:
+            type: string
+          type: array
+        dst:
+          items:
+            type: string
+          type: array
+        users:
+          items:
+            type: string
+          type: array
+    ACLRule:
+      example:
+        dst:
+        - dst
+        - dst
+        src:
+        - src
+        - src
+        action: action
+      properties:
+        action:
+          type: string
+        src:
+          items:
+            type: string
+          type: array
+        dst:
+          items:
+            type: string
+          type: array
