@@ -17,18 +17,22 @@ import (
 
 // SSHRule struct for SSHRule
 type SSHRule struct {
-	Action *string `json:"action,omitempty"`
-	Src []string `json:"src,omitempty"`
-	Dst []string `json:"dst,omitempty"`
-	Users []string `json:"users,omitempty"`
+	Action string `json:"action"`
+	Src []string `json:"src"`
+	Dst []string `json:"dst"`
+	Users []string `json:"users"`
 }
 
 // NewSSHRule instantiates a new SSHRule object
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewSSHRule() *SSHRule {
+func NewSSHRule(action string, src []string, dst []string, users []string) *SSHRule {
 	this := SSHRule{}
+	this.Action = action
+	this.Src = src
+	this.Dst = dst
+	this.Users = users
 	return &this
 }
 
@@ -40,146 +44,114 @@ func NewSSHRuleWithDefaults() *SSHRule {
 	return &this
 }
 
-// GetAction returns the Action field value if set, zero value otherwise.
+// GetAction returns the Action field value
 func (o *SSHRule) GetAction() string {
-	if o == nil || o.Action == nil {
+	if o == nil {
 		var ret string
 		return ret
 	}
-	return *o.Action
+
+	return o.Action
 }
 
-// GetActionOk returns a tuple with the Action field value if set, nil otherwise
+// GetActionOk returns a tuple with the Action field value
 // and a boolean to check if the value has been set.
 func (o *SSHRule) GetActionOk() (*string, bool) {
-	if o == nil || o.Action == nil {
+	if o == nil {
 		return nil, false
 	}
-	return o.Action, true
+	return &o.Action, true
 }
 
-// HasAction returns a boolean if a field has been set.
-func (o *SSHRule) HasAction() bool {
-	if o != nil && o.Action != nil {
-		return true
-	}
-
-	return false
-}
-
-// SetAction gets a reference to the given string and assigns it to the Action field.
+// SetAction sets field value
 func (o *SSHRule) SetAction(v string) {
-	o.Action = &v
+	o.Action = v
 }
 
-// GetSrc returns the Src field value if set, zero value otherwise.
+// GetSrc returns the Src field value
 func (o *SSHRule) GetSrc() []string {
-	if o == nil || o.Src == nil {
+	if o == nil {
 		var ret []string
 		return ret
 	}
+
 	return o.Src
 }
 
-// GetSrcOk returns a tuple with the Src field value if set, nil otherwise
+// GetSrcOk returns a tuple with the Src field value
 // and a boolean to check if the value has been set.
 func (o *SSHRule) GetSrcOk() ([]string, bool) {
-	if o == nil || o.Src == nil {
+	if o == nil {
 		return nil, false
 	}
 	return o.Src, true
 }
 
-// HasSrc returns a boolean if a field has been set.
-func (o *SSHRule) HasSrc() bool {
-	if o != nil && o.Src != nil {
-		return true
-	}
-
-	return false
-}
-
-// SetSrc gets a reference to the given []string and assigns it to the Src field.
+// SetSrc sets field value
 func (o *SSHRule) SetSrc(v []string) {
 	o.Src = v
 }
 
-// GetDst returns the Dst field value if set, zero value otherwise.
+// GetDst returns the Dst field value
 func (o *SSHRule) GetDst() []string {
-	if o == nil || o.Dst == nil {
+	if o == nil {
 		var ret []string
 		return ret
 	}
+
 	return o.Dst
 }
 
-// GetDstOk returns a tuple with the Dst field value if set, nil otherwise
+// GetDstOk returns a tuple with the Dst field value
 // and a boolean to check if the value has been set.
 func (o *SSHRule) GetDstOk() ([]string, bool) {
-	if o == nil || o.Dst == nil {
+	if o == nil {
 		return nil, false
 	}
 	return o.Dst, true
 }
 
-// HasDst returns a boolean if a field has been set.
-func (o *SSHRule) HasDst() bool {
-	if o != nil && o.Dst != nil {
-		return true
-	}
-
-	return false
-}
-
-// SetDst gets a reference to the given []string and assigns it to the Dst field.
+// SetDst sets field value
 func (o *SSHRule) SetDst(v []string) {
 	o.Dst = v
 }
 
-// GetUsers returns the Users field value if set, zero value otherwise.
+// GetUsers returns the Users field value
 func (o *SSHRule) GetUsers() []string {
-	if o == nil || o.Users == nil {
+	if o == nil {
 		var ret []string
 		return ret
 	}
+
 	return o.Users
 }
 
-// GetUsersOk returns a tuple with the Users field value if set, nil otherwise
+// GetUsersOk returns a tuple with the Users field value
 // and a boolean to check if the value has been set.
 func (o *SSHRule) GetUsersOk() ([]string, bool) {
-	if o == nil || o.Users == nil {
+	if o == nil {
 		return nil, false
 	}
 	return o.Users, true
 }
 
-// HasUsers returns a boolean if a field has been set.
-func (o *SSHRule) HasUsers() bool {
-	if o != nil && o.Users != nil {
-		return true
-	}
-
-	return false
-}
-
-// SetUsers gets a reference to the given []string and assigns it to the Users field.
+// SetUsers sets field value
 func (o *SSHRule) SetUsers(v []string) {
 	o.Users = v
 }
 
 func (o SSHRule) MarshalJSON() ([]byte, error) {
 	toSerialize := map[string]interface{}{}
-	if o.Action != nil {
+	if true {
 		toSerialize["action"] = o.Action
 	}
-	if o.Src != nil {
+	if true {
 		toSerialize["src"] = o.Src
 	}
-	if o.Dst != nil {
+	if true {
 		toSerialize["dst"] = o.Dst
 	}
-	if o.Users != nil {
+	if true {
 		toSerialize["users"] = o.Users
 	}
 	return json.Marshal(toSerialize)

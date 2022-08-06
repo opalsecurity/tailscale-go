@@ -180,6 +180,11 @@ components:
           items:
             type: string
           type: array
+      required:
+      - action
+      - dst
+      - src
+      - users
     ACLRule:
       example:
         dst:
@@ -200,3 +205,7 @@ components:
           items:
             type: string
           type: array
+      required:
+      - action
+      - dst
+      - src

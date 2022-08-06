@@ -17,17 +17,20 @@ import (
 
 // ACLRule struct for ACLRule
 type ACLRule struct {
-	Action *string `json:"action,omitempty"`
-	Src []string `json:"src,omitempty"`
-	Dst []string `json:"dst,omitempty"`
+	Action string `json:"action"`
+	Src []string `json:"src"`
+	Dst []string `json:"dst"`
 }
 
 // NewACLRule instantiates a new ACLRule object
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewACLRule() *ACLRule {
+func NewACLRule(action string, src []string, dst []string) *ACLRule {
 	this := ACLRule{}
+	this.Action = action
+	this.Src = src
+	this.Dst = dst
 	return &this
 }
 
@@ -39,111 +42,87 @@ func NewACLRuleWithDefaults() *ACLRule {
 	return &this
 }
 
-// GetAction returns the Action field value if set, zero value otherwise.
+// GetAction returns the Action field value
 func (o *ACLRule) GetAction() string {
-	if o == nil || o.Action == nil {
+	if o == nil {
 		var ret string
 		return ret
 	}
-	return *o.Action
+
+	return o.Action
 }
 
-// GetActionOk returns a tuple with the Action field value if set, nil otherwise
+// GetActionOk returns a tuple with the Action field value
 // and a boolean to check if the value has been set.
 func (o *ACLRule) GetActionOk() (*string, bool) {
-	if o == nil || o.Action == nil {
+	if o == nil {
 		return nil, false
 	}
-	return o.Action, true
+	return &o.Action, true
 }
 
-// HasAction returns a boolean if a field has been set.
-func (o *ACLRule) HasAction() bool {
-	if o != nil && o.Action != nil {
-		return true
-	}
-
-	return false
-}
-
-// SetAction gets a reference to the given string and assigns it to the Action field.
+// SetAction sets field value
 func (o *ACLRule) SetAction(v string) {
-	o.Action = &v
+	o.Action = v
 }
 
-// GetSrc returns the Src field value if set, zero value otherwise.
+// GetSrc returns the Src field value
 func (o *ACLRule) GetSrc() []string {
-	if o == nil || o.Src == nil {
+	if o == nil {
 		var ret []string
 		return ret
 	}
+
 	return o.Src
 }
 
-// GetSrcOk returns a tuple with the Src field value if set, nil otherwise
+// GetSrcOk returns a tuple with the Src field value
 // and a boolean to check if the value has been set.
 func (o *ACLRule) GetSrcOk() ([]string, bool) {
-	if o == nil || o.Src == nil {
+	if o == nil {
 		return nil, false
 	}
 	return o.Src, true
 }
 
-// HasSrc returns a boolean if a field has been set.
-func (o *ACLRule) HasSrc() bool {
-	if o != nil && o.Src != nil {
-		return true
-	}
-
-	return false
-}
-
-// SetSrc gets a reference to the given []string and assigns it to the Src field.
+// SetSrc sets field value
 func (o *ACLRule) SetSrc(v []string) {
 	o.Src = v
 }
 
-// GetDst returns the Dst field value if set, zero value otherwise.
+// GetDst returns the Dst field value
 func (o *ACLRule) GetDst() []string {
-	if o == nil || o.Dst == nil {
+	if o == nil {
 		var ret []string
 		return ret
 	}
+
 	return o.Dst
 }
 
-// GetDstOk returns a tuple with the Dst field value if set, nil otherwise
+// GetDstOk returns a tuple with the Dst field value
 // and a boolean to check if the value has been set.
 func (o *ACLRule) GetDstOk() ([]string, bool) {
-	if o == nil || o.Dst == nil {
+	if o == nil {
 		return nil, false
 	}
 	return o.Dst, true
 }
 
-// HasDst returns a boolean if a field has been set.
-func (o *ACLRule) HasDst() bool {
-	if o != nil && o.Dst != nil {
-		return true
-	}
-
-	return false
-}
-
-// SetDst gets a reference to the given []string and assigns it to the Dst field.
+// SetDst sets field value
 func (o *ACLRule) SetDst(v []string) {
 	o.Dst = v
 }
 
 func (o ACLRule) MarshalJSON() ([]byte, error) {
 	toSerialize := map[string]interface{}{}
-	if o.Action != nil {
+	if true {
 		toSerialize["action"] = o.Action
 	}
-	if o.Src != nil {
+	if true {
 		toSerialize["src"] = o.Src
 	}
-	if o.Dst != nil {
+	if true {
 		toSerialize["dst"] = o.Dst
 	}
 	return json.Marshal(toSerialize)
