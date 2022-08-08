@@ -44,6 +44,15 @@ paths:
         schema:
           type: string
         style: simple
+      - description: Set this value to the ETag header provided in an ACL GET request
+          to avoid missed updates.
+        explode: false
+        in: header
+        name: If-Match
+        required: false
+        schema:
+          type: string
+        style: simple
       requestBody:
         content:
           application/json:

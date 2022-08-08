@@ -131,7 +131,14 @@ type ApiTailnetTailnetNameAclPostRequest struct {
 	ctx context.Context
 	ApiService *DefaultApiService
 	tailnetName string
+	ifMatch *string
 	tailnetACL *TailnetACL
+}
+
+// Set this value to the ETag header provided in an ACL GET request to avoid missed updates.
+func (r ApiTailnetTailnetNameAclPostRequest) IfMatch(ifMatch string) ApiTailnetTailnetNameAclPostRequest {
+	r.ifMatch = &ifMatch
+	return r
 }
 
 func (r ApiTailnetTailnetNameAclPostRequest) TailnetACL(tailnetACL TailnetACL) ApiTailnetTailnetNameAclPostRequest {
@@ -198,6 +205,9 @@ func (a *DefaultApiService) TailnetTailnetNameAclPostExecute(r ApiTailnetTailnet
 	localVarHTTPHeaderAccept := selectHeaderAccept(localVarHTTPHeaderAccepts)
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
+	}
+	if r.ifMatch != nil {
+		localVarHeaderParams["If-Match"] = parameterToString(*r.ifMatch, "")
 	}
 	// body params
 	localVarPostBody = r.tailnetACL

@@ -81,7 +81,7 @@ No authorization required
 
 ## TailnetTailnetNameAclPost
 
-> TailnetACL TailnetTailnetNameAclPost(ctx, tailnetName).TailnetACL(tailnetACL).Execute()
+> TailnetACL TailnetTailnetNameAclPost(ctx, tailnetName).IfMatch(ifMatch).TailnetACL(tailnetACL).Execute()
 
 
 
@@ -101,11 +101,12 @@ import (
 
 func main() {
     tailnetName := "tailnetName_example" // string | The name of the Tailnet
+    ifMatch := "ifMatch_example" // string | Set this value to the ETag header provided in an ACL GET request to avoid missed updates. (optional)
     tailnetACL := *openapiclient.NewTailnetACL() // TailnetACL |  (optional)
 
     configuration := openapiclient.NewConfiguration()
     apiClient := openapiclient.NewAPIClient(configuration)
-    resp, r, err := apiClient.DefaultApi.TailnetTailnetNameAclPost(context.Background(), tailnetName).TailnetACL(tailnetACL).Execute()
+    resp, r, err := apiClient.DefaultApi.TailnetTailnetNameAclPost(context.Background(), tailnetName).IfMatch(ifMatch).TailnetACL(tailnetACL).Execute()
     if err != nil {
         fmt.Fprintf(os.Stderr, "Error when calling `DefaultApi.TailnetTailnetNameAclPost``: %v\n", err)
         fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
@@ -131,6 +132,7 @@ Other parameters are passed through a pointer to a apiTailnetTailnetNameAclPostR
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 
+ **ifMatch** | **string** | Set this value to the ETag header provided in an ACL GET request to avoid missed updates. | 
  **tailnetACL** | [**TailnetACL**](TailnetACL.md) |  | 
 
 ### Return type
